@@ -1,0 +1,35 @@
+🤖 Penpal AI - {{#if isTrialActive}}Période d'essai commencée{{else}}Abonnement confirmé{{/if}}
+
+Bonjour {{fullName}},
+
+{{#if isTrialActive}}
+🎉 Excellente nouvelle ! Votre période d'essai gratuite de Penpal AI a commencé.
+
+Détails de votre essai :
+- Plan : Essai {{plan}}
+{{#if trialEnd}}
+- Fin de l'essai : {{trialEnd}}
+{{/if}}
+- Accès : Toutes les fonctionnalités premium
+
+Profitez pleinement de toutes nos fonctionnalités pendant votre période d'essai. Aucun frais ne sera prélevé jusqu'à la fin de cette période.
+{{else}}
+🎉 Votre abonnement Penpal AI est maintenant actif ! Merci de nous faire confiance.
+
+Détails de votre abonnement :
+- Plan : {{plan}}
+{{#if amount}}
+- Montant : {{amount}} {{currency}}
+{{/if}}
+{{#if nextBillingDate}}
+- Prochaine facturation : {{nextBillingDate}}
+{{/if}}
+{{/if}}
+
+Accéder à Penpal AI : {{baseUrl}}
+
+Si vous avez des questions, n'hésitez pas à nous contacter. Notre équipe est là pour vous accompagner !
+
+Merci de faire partie de la communauté Penpal AI ! 🚀
+
+© {{year}} Penpal AI. Tous droits réservés. 

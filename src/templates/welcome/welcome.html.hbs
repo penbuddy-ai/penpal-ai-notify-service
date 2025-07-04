@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue dans Penpal AI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+        .welcome-title {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .highlight {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4a90e2;
+            margin: 20px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        .social-links {
+            margin: 20px 0;
+        }
+        .social-links a {
+            color: #4a90e2;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🤖 Penpal AI</div>
+            <h1 class="welcome-title">Bienvenue {{fullName}} ! 🎉</h1>
+        </div>
+        
+        <div class="content">
+            <p>Félicitations ! Votre compte Penpal AI a été créé avec succès via {{provider}}.</p>
+            
+            <div class="highlight">
+                <p><strong>🚀 Vous êtes maintenant prêt(e) à :</strong></p>
+                <ul>
+                    <li>💬 Converser avec des IA spécialisées dans différentes langues</li>
+                    <li>📚 Améliorer vos compétences linguistiques de manière interactive</li>
+                    <li>🌍 Découvrir de nouvelles cultures à travers nos personnages IA</li>
+                    <li>📈 Suivre vos progrès en temps réel</li>
+                </ul>
+            </div>
+            
+            <p>Commencez dès maintenant votre aventure d'apprentissage des langues :</p>
+            
+            <center>
+                <a href="{{baseUrl}}/onboarding" class="cta-button">Accéder à mon tableau de bord</a>
+            </center>
+            
+            <p>Si vous avez des questions, notre équipe de support est là pour vous aider !</p>
+        </div>
+        
+        <div class="footer">
+            <div class="social-links">
+                <a href="{{baseUrl}}/support">Support</a> |
+                <a href="{{baseUrl}}/about">À propos</a> |
+                <a href="{{baseUrl}}/privacy">Confidentialité</a>
+            </div>
+            <p>© {{year}} Penpal AI. Tous droits réservés.</p>
+            <p><small>Cet email a été envoyé à {{email}} suite à la création de votre compte.</small></p>
+        </div>
+    </div>
+</body>
+</html> 
