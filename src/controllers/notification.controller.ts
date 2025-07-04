@@ -9,7 +9,7 @@ import {
   Get 
 } from '@nestjs/common';
 import { EmailService } from '../services/email.service';
-import { SendWelcomeEmailDto, NotificationResponseDto } from '../dto/notification.dto';
+import { SendWelcomeEmailDto, NotificationResponseDto, SendSubscriptionConfirmationEmailDto } from '../dto/notification.dto';
 import { ApiKeyGuard } from '../guards/api-key.guard';
 
 @Controller('notifications')
@@ -49,6 +49,49 @@ export class NotificationController {
       }
     } catch (error) {
       this.logger.error(`Error processing welcome email request: ${error.message}`, error.stack);
+      return {
+        success: false,
+        message: `Error: ${error.message}`,
+        timestamp: new Date(),
+      };
+    }
+  }
+
+  @Post('subscription-confirmation')
+  @HttpCode(HttpStatus.OK)
+  async sendSubscriptionConfirmationEmail(@Body() sendSubscriptionEmailDto: SendSubscriptionConfirmationEmailDto): Promise<NotificationResponseDto> {
+    this.logger.log(`Received subscription confirmation email request for: ${sendSubscriptionEmailDto.email}`);
+
+    try {
+      const success = await this.emailService.sendSubscriptionConfirmationEmail({
+        email: sendSubscriptionEmailDto.email,
+        firstName: sendSubscriptionEmailDto.firstName,
+        lastName: sendSubscriptionEmailDto.lastName,
+        plan: sendSubscriptionEmailDto.plan,
+        status: sendSubscriptionEmailDto.status,
+        trialEnd: sendSubscriptionEmailDto.trialEnd ? new Date(sendSubscriptionEmailDto.trialEnd) : undefined,
+        nextBillingDate: sendSubscriptionEmailDto.nextBillingDate ? new Date(sendSubscriptionEmailDto.nextBillingDate) : undefined,
+        amount: sendSubscriptionEmailDto.amount,
+        currency: sendSubscriptionEmailDto.currency,
+      });
+
+      if (success) {
+        this.logger.log(`Subscription confirmation email sent successfully to: ${sendSubscriptionEmailDto.email}`);
+        return {
+          success: true,
+          message: 'Subscription confirmation email sent successfully',
+          timestamp: new Date(),
+        };
+      } else {
+        this.logger.error(`Failed to send subscription confirmation email to: ${sendSubscriptionEmailDto.email}`);
+        return {
+          success: false,
+          message: 'Failed to send subscription confirmation email',
+          timestamp: new Date(),
+        };
+      }
+    } catch (error) {
+      this.logger.error(`Error processing subscription confirmation email request: ${error.message}`, error.stack);
       return {
         success: false,
         message: `Error: ${error.message}`,
