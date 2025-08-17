@@ -1,7 +1,8 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import * as nodemailer from 'nodemailer';
-import { TemplateService, WelcomeEmailData, SubscriptionConfirmationEmailData } from '../utils/template.service';
+import { Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import * as nodemailer from "nodemailer";
+
+import { SubscriptionConfirmationEmailData, TemplateService, WelcomeEmailData } from "../utils/template.service";
 
 @Injectable()
 export class EmailService {
@@ -13,7 +14,7 @@ export class EmailService {
     private readonly configService: ConfigService,
     private readonly templateService: TemplateService,
   ) {
-    this.emailConfig = this.configService.get('email');
+    this.emailConfig = this.configService.get("email");
     this.createTransporter();
   }
 
@@ -33,7 +34,8 @@ export class EmailService {
       });
 
       this.logger.log(`Email transporter configured for ${this.emailConfig.host}:${this.emailConfig.port}`);
-    } catch (error) {
+    }
+    catch (error) {
       this.logger.error(`Failed to create email transporter: ${error.message}`);
       throw error;
     }
@@ -45,7 +47,7 @@ export class EmailService {
 
       // Check if we're in test mode (no SMTP configured)
       if (!this.emailConfig.auth.user || !this.emailConfig.auth.pass) {
-        this.logger.warn('SMTP not configured - running in TEST MODE');
+        this.logger.warn("SMTP not configured - running in TEST MODE");
         this.logTestWelcomeEmail(userData);
         return true;
       }
@@ -65,9 +67,10 @@ export class EmailService {
 
       const info = await this.transporter.sendMail(mailOptions);
       this.logger.log(`Welcome email sent successfully to ${userData.email}. Message ID: ${info.messageId}`);
-      
+
       return true;
-    } catch (error) {
+    }
+    catch (error) {
       this.logger.error(`Failed to send welcome email to ${userData.email}: ${error.message}`, error.stack);
       return false;
     }
@@ -79,7 +82,7 @@ export class EmailService {
 
       // Check if we're in test mode (no SMTP configured)
       if (!this.emailConfig.auth.user || !this.emailConfig.auth.pass) {
-        this.logger.warn('SMTP not configured - running in TEST MODE');
+        this.logger.warn("SMTP not configured - running in TEST MODE");
         this.logTestSubscriptionEmail(subscriptionData);
         return true;
       }
@@ -99,9 +102,10 @@ export class EmailService {
 
       const info = await this.transporter.sendMail(mailOptions);
       this.logger.log(`Subscription confirmation email sent successfully to ${subscriptionData.email}. Message ID: ${info.messageId}`);
-      
+
       return true;
-    } catch (error) {
+    }
+    catch (error) {
       this.logger.error(`Failed to send subscription confirmation email to ${subscriptionData.email}: ${error.message}`, error.stack);
       return false;
     }
@@ -110,9 +114,10 @@ export class EmailService {
   async verifyConnection(): Promise<boolean> {
     try {
       await this.transporter.verify();
-      this.logger.log('Email transporter connection verified successfully');
+      this.logger.log("Email transporter connection verified successfully");
       return true;
-    } catch (error) {
+    }
+    catch (error) {
       this.logger.error(`Email transporter verification failed: ${error.message}`);
       return false;
     }
@@ -154,19 +159,19 @@ Plan: ${subscriptionData.plan}
 Status: ${subscriptionData.status}
 ==============================================
 
-${subscriptionData.status === 'trial' ? '🎉 Période d\'essai commencée !' : '🎉 Abonnement confirmé !'}
+${subscriptionData.status === "trial" ? "🎉 Période d'essai commencée !" : "🎉 Abonnement confirmé !"}
 
 Bonjour ${subscriptionData.firstName} !
 
-${subscriptionData.status === 'trial' 
-  ? `Votre période d'essai gratuite Penpal AI a commencé.
-Plan: Essai ${subscriptionData.plan === 'monthly' ? 'Mensuel' : 'Annuel'}
-${subscriptionData.trialEnd ? `Fin: ${subscriptionData.trialEnd.toLocaleDateString('fr-FR')}` : ''}
+${subscriptionData.status === "trial"
+    ? `Votre période d'essai gratuite Penpal AI a commencé.
+Plan: Essai ${subscriptionData.plan === "monthly" ? "Mensuel" : "Annuel"}
+${subscriptionData.trialEnd ? `Fin: ${subscriptionData.trialEnd.toLocaleDateString("fr-FR")}` : ""}
 Accès: Toutes les fonctionnalités premium`
-  : `Votre abonnement Penpal AI est maintenant actif !
-Plan: ${subscriptionData.plan === 'monthly' ? 'Mensuel' : 'Annuel'}
-${subscriptionData.amount ? `Montant: ${(subscriptionData.amount / 100).toFixed(2)} ${subscriptionData.currency?.toUpperCase() || 'EUR'}` : ''}
-${subscriptionData.nextBillingDate ? `Prochaine facturation: ${subscriptionData.nextBillingDate.toLocaleDateString('fr-FR')}` : ''}`
+    : `Votre abonnement Penpal AI est maintenant actif !
+Plan: ${subscriptionData.plan === "monthly" ? "Mensuel" : "Annuel"}
+${subscriptionData.amount ? `Montant: ${(subscriptionData.amount / 100).toFixed(2)} ${subscriptionData.currency?.toUpperCase() || "EUR"}` : ""}
+${subscriptionData.nextBillingDate ? `Prochaine facturation: ${subscriptionData.nextBillingDate.toLocaleDateString("fr-FR")}` : ""}`
 }
 
 Accédez à Penpal AI : ${this.emailConfig.templates.baseUrl}
@@ -175,4 +180,4 @@ Accédez à Penpal AI : ${this.emailConfig.templates.baseUrl}
 ✅ Email de test affiché dans les logs
     `);
   }
-} 
+}

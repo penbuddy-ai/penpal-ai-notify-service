@@ -97,6 +97,7 @@ npm run start:dev
 ### Notifications
 
 #### Send Welcome Email
+
 ```http
 POST /api/v1/notifications/welcome-email
 Content-Type: application/json
@@ -105,13 +106,14 @@ X-API-Key: your-api-key
 {
   "email": "user@example.com",
   "firstName": "John",
-  "lastName": "Doe", 
+  "lastName": "Doe",
   "provider": "google",
   "userId": "optional-user-id"
 }
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -121,12 +123,14 @@ X-API-Key: your-api-key
 ```
 
 #### Health Check
+
 ```http
 GET /api/v1/notifications/health
 X-API-Key: your-api-key
 ```
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -221,6 +225,7 @@ node test-email.js
 ```
 
 This will test:
+
 - Health check endpoint
 - Welcome email sending
 - API key authentication
@@ -272,10 +277,12 @@ CMD ["node", "dist/main.js"]
 #### 1. Email Not Sending
 
 **Symptoms:**
+
 - Health check shows "disconnected"
 - Welcome email requests return success but no email received
 
 **Solutions:**
+
 - Verify SMTP credentials in environment variables
 - Check if SMTP server allows connections from your IP
 - For Gmail: ensure App Password is used, not account password
@@ -285,10 +292,12 @@ CMD ["node", "dist/main.js"]
 #### 2. Authentication Errors
 
 **Symptoms:**
+
 - 401 Unauthorized responses
 - "Invalid API key" errors
 
 **Solutions:**
+
 - Verify `NOTIFY_SERVICE_API_KEY` is set correctly
 - Ensure API key matches between auth service and notification service
 - Check API key is sent in correct header format
@@ -296,10 +305,12 @@ CMD ["node", "dist/main.js"]
 #### 3. Template Rendering Issues
 
 **Symptoms:**
+
 - Emails sent but content looks broken
 - Missing variables in email content
 
 **Solutions:**
+
 - Verify all template variables are provided
 - Check Handlebars template syntax
 - Test with simple variables first
@@ -349,6 +360,7 @@ This project is licensed under the MIT License.
 ## Support
 
 For issues and questions:
+
 - Check logs for detailed error messages
 - Use the test script to diagnose problems
 - Review SMTP provider documentation
