@@ -127,6 +127,7 @@ export class TemplateService {
       facebook: "Facebook",
       apple: "Apple",
       github: "GitHub",
+      email: "notre formulaire d'inscription",
     };
     return providers[provider] || provider;
   }

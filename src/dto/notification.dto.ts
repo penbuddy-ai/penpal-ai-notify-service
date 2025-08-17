@@ -11,7 +11,7 @@ export class SendWelcomeEmailDto {
   lastName: string;
 
   @IsString()
-  @IsIn(["google", "facebook", "apple", "github"])
+  @IsIn(["google", "facebook", "apple", "github", "email"])
   provider: string;
 
   @IsOptional()
