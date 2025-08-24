@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, IsIn, IsNumber, IsDateString } from 'class-validator';
+import { IsDateString, IsEmail, IsIn, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class SendWelcomeEmailDto {
   @IsEmail()
@@ -11,7 +11,7 @@ export class SendWelcomeEmailDto {
   lastName: string;
 
   @IsString()
-  @IsIn(['google', 'facebook', 'apple', 'github'])
+  @IsIn(["google", "facebook", "apple", "github", "email"])
   provider: string;
 
   @IsOptional()
@@ -30,12 +30,12 @@ export class SendSubscriptionConfirmationEmailDto {
   lastName: string;
 
   @IsString()
-  @IsIn(['monthly', 'yearly'])
-  plan: 'monthly' | 'yearly';
+  @IsIn(["monthly", "yearly"])
+  plan: "monthly" | "yearly";
 
   @IsString()
-  @IsIn(['trial', 'active'])
-  status: 'trial' | 'active';
+  @IsIn(["trial", "active"])
+  status: "trial" | "active";
 
   @IsOptional()
   @IsDateString()
@@ -62,4 +62,4 @@ export class NotificationResponseDto {
   success: boolean;
   message: string;
   timestamp: Date;
-} 
+}

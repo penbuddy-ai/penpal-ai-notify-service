@@ -83,7 +83,7 @@ Les templates utilisent [Handlebars](https://handlebarsjs.com/) :
 ```typescript
 // Vérifier le statut du cache
 const status = templateService.getCacheStatus();
-console.log('Templates en cache:', status.keys);
+console.log("Templates en cache:", status.keys);
 
 // Vider le cache (dev uniquement)
 templateService.clearCache();
@@ -92,12 +92,14 @@ templateService.clearCache();
 ## 📝 Variables disponibles
 
 ### Welcome Email
+
 - `firstName`, `lastName`, `fullName`
 - `provider` (Google, Facebook, etc.)
 - `email`, `baseUrl`, `year`
 
 ### Subscription Email
+
 - `firstName`, `lastName`, `fullName`
 - `plan`, `planType`, `status`
 - `isTrialActive`, `trialEnd`, `nextBillingDate`
-- `amount`, `currency`, `baseUrl`, `year` 
+- `amount`, `currency`, `baseUrl`, `year`
